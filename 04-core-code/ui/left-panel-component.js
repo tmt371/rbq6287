@@ -14,13 +14,12 @@ export class LeftPanelComponent {
         this.panelToggle = document.getElementById(DOM_IDS.LEFT_PANEL_TOGGLE);
 
         // Cache all DOM elements in the constructor.
-        this.locationButton = document.getElementById('btn-focus-location');
-        this.locationInput = document.getElementById(DOM_IDS.LOCATION_INPUT_BOX);
+        // [REMOVED] K1 DOM Caching moved to K1TabComponent
         this.fabricColorButton = document.getElementById('btn-focus-fabric');
         this.lfButton = document.getElementById('btn-light-filter');
         this.lfDelButton = document.getElementById('btn-lf-del');
         // [NEW] Cache the SSet button
-        this.k2SSetButton = document.getElementById('btn-k2-sset');
+         this.k2SSetButton = document.getElementById('btn-k2-sset');
         this.k3EditButton = document.getElementById('btn-k3-edit');
         this.k3OverButton = document.getElementById('btn-batch-cycle-over');
         this.k3OiButton = document.getElementById('btn-batch-cycle-oi');
@@ -69,7 +68,6 @@ export class LeftPanelComponent {
     _updateTabStates(uiState) {
         const { activeEditMode, activeTabId, dualChainMode, driveAccessoryMode } = uiState;
         const isInEditMode = activeEditMode !== null || dualChainMode !== null || driveAccessoryMode !== null;
-
         const activeTabButton = document.getElementById(activeTabId);
         const activeContentTarget = activeTabButton ? activeTabButton.dataset.tabTarget : null;
 
@@ -119,14 +117,7 @@ export class LeftPanelComponent {
         const accessoriesSummary = productData.summary.accessories || {};
 
         // --- K1 Location Input State ---
-        if (this.locationInput) {
-            const isLocationActive = activeEditMode === 'K1';
-            this.locationInput.disabled = !isLocationActive;
-            this.locationInput.classList.toggle('active', isLocationActive);
-            if (this.locationInput.value !== locationInputValue) {
-                this.locationInput.value = locationInputValue;
-            }
-        }
+        // [REMOVED] K1 rendering logic moved to K1TabComponent
         
         // [MODIFIED] Implement strict mutual exclusion for K2 buttons
         const isFCMode = activeEditMode === 'K2';
@@ -135,7 +126,7 @@ export class LeftPanelComponent {
         const isSSetMode = activeEditMode === 'K2_SSET_SELECT';
         const isAnyK2ModeActive = isFCMode || isLFSelectMode || isLFDeleteMode || isSSetMode;
 
-        if (this.locationButton) this.locationButton.classList.toggle('active', activeEditMode === 'K1');
+        // [REMOVED] K1 button logic moved to K1TabComponent
         
         if (this.fabricColorButton) {
             this.fabricColorButton.classList.toggle('active', isFCMode);
@@ -145,14 +136,14 @@ export class LeftPanelComponent {
             this.lfButton.classList.toggle('active', isLFSelectMode);
             this.lfButton.disabled = isAnyK2ModeActive && !isLFSelectMode;
         }
-        if (this.lfDelButton) {
+         if (this.lfDelButton) {
             const hasLFModified = lfModifiedRowIndexes.length > 0;
             this.lfDelButton.classList.toggle('active', isLFDeleteMode);
             // Button is disabled if ANY K2 mode is active (and it's not this one), OR if no LF-modified rows exist
             this.lfDelButton.disabled = (isAnyK2ModeActive && !isLFDeleteMode) || !hasLFModified;
         }
         if (this.k2SSetButton) {
-            this.k2SSetButton.classList.toggle('active', isSSetMode);
+             this.k2SSetButton.classList.toggle('active', isSSetMode);
             this.k2SSetButton.disabled = isAnyK2ModeActive && !isSSetMode;
         }
 
@@ -174,7 +165,7 @@ export class LeftPanelComponent {
             { el: this.k4WinderButton, mode: 'winder' },
             { el: this.k4MotorButton, mode: 'motor' },
             { el: this.k4RemoteButton, mode: 'remote' },
-            { el: this.k4ChargerButton, mode: 'charger' },
+             { el: this.k4ChargerButton, mode: 'charger' },
             { el: this.k4CordButton, mode: 'cord' }
         ];
         
@@ -208,7 +199,7 @@ export class LeftPanelComponent {
         if (this.k4CordSubtractBtn) this.k4CordSubtractBtn.disabled = cordBtnsDisabled;
 
         // --- K5 (Dual/Chain & Summary) States ---
-        if (this.k5DualButton) {
+         if (this.k5DualButton) {
             const isDisabled = dualChainMode !== null && dualChainMode !== 'dual';
             this.k5DualButton.classList.toggle('active', dualChainMode === 'dual');
             this.k5DualButton.disabled = isDisabled;
@@ -219,7 +210,7 @@ export class LeftPanelComponent {
             this.k5ChainButton.disabled = isDisabled;
         }
         
-        if (this.k5InputDisplay) {
+         if (this.k5InputDisplay) {
             const isChainInputActive = dualChainMode === 'chain' && targetCell && targetCell.column === 'chain';
             this.k5InputDisplay.disabled = !isChainInputActive;
             this.k5InputDisplay.classList.toggle('active', isChainInputActive);
