@@ -17,8 +17,8 @@ export class LeftPanelInputHandler {
         // [REMOVED] _setupK1Inputs() call moved to K1TabInputHandler
         this._setupK2Inputs();
         // [REMOVED] _setupK3Inputs() call moved to K3TabInputHandler
-        this._setupK4Inputs(); // [NOTE] This handles K5 (Dual/Chain) logic
-        // [REMOVED] _setupK5Inputs() call moved to K4TabInputHandler
+        // [REMOVED] _setupK4Inputs() (K5 logic) call moved to K5TabInputHandler
+        // [REMOVED] _setupK5Inputs() (K4 logic) call moved to K4TabInputHandler
     }
 
     _setupNavigationToggle() {
@@ -100,30 +100,7 @@ export class LeftPanelInputHandler {
 
     // [REMOVED] _setupK3Inputs() method has been cut and moved to K3TabInputHandler.
 
-    _setupK4Inputs() {
-        const setupK4Button = (buttonId, mode) => {
-            const button = document.getElementById(buttonId);
-            if (button) {
-                 button.addEventListener('click', () => {
-                    this.eventAggregator.publish(EVENTS.DUAL_CHAIN_MODE_CHANGED, { mode });
-                });
-            }
-        };
-        setupK4Button('btn-k4-dual', 'dual');
-        setupK4Button('btn-k4-chain', 'chain');
+    // [REMOVED] _setupK4Inputs() method (K5 logic) has been cut and moved to K5TabInputHandler.
 
-        const k4Input = document.getElementById('k4-input-display');
-        if (k4Input) {
-            k4Input.addEventListener('keydown', (event) => {
-                 if (event.key === 'Enter') {
-                    event.preventDefault();
-                    this.eventAggregator.publish(EVENTS.CHAIN_ENTER_PRESSED, {
-                        value: event.target.value
-                     });
-                }
-            });
-        }
-    }
-
-    // [REMOVED] _setupK5Inputs() method has been cut and moved to K4TabInputHandler.
+    // [REMOVED] _setupK5Inputs() method (K4 logic) has been cut and moved to K4TabInputHandler.
 }
