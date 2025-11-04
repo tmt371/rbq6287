@@ -107,12 +107,6 @@ export class AppContext {
         const k3TabComponent = new K3TabComponent();
         this.register('k3TabComponent', k3TabComponent);
 
-        // --- [NEW] Instantiate K5 Tab Components (Phase 3 Refactor) ---
-        const k5TabInputHandler = new K5TabInputHandler({ eventAggregator });
-        this.register('k5TabInputHandler', k5TabInputHandler);
-        const k5TabComponent = new K5TabComponent();
-        this.register('k5TabComponent', k5TabComponent);
-
         // --- [NEW] Instantiate the new QuoteGeneratorService ---
         const quoteGeneratorService = new QuoteGeneratorService({ calculationService });
         this.register('quoteGeneratorService', quoteGeneratorService);
@@ -201,8 +195,6 @@ export class AppContext {
         k1TabInputHandler.initialize();
         // [NEW] Initialize K3 Input Handler (Phase 2 Refactor)
         k3TabInputHandler.initialize();
-        // [NEW] Initialize K5 Input Handler (Phase 3 Refactor)
-        k5TabInputHandler.initialize();
     }
 }
 
@@ -238,5 +230,3 @@ import { K1TabInputHandler } from './ui/tabs/k1-tab/k1-tab-input-handler.js';
 import { K1TabComponent } from './ui/tabs/k1-tab/k1-tab-component.js';
 import { K3TabInputHandler } from './ui/tabs/k3-tab/k3-tab-input-handler.js';
 import { K3TabComponent } from './ui/tabs/k3-tab/k3-tab-component.js';
-import { K5TabInputHandler } from './ui/tabs/k5-tab/k5-tab-input-handler.js';
-import { K5TabComponent } from './ui/tabs/k5-tab/k5-tab-component.js';

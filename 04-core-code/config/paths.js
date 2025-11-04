@@ -11,14 +11,10 @@ export const paths = {
             html: './04-core-code/ui/tabs/k1-tab/k1-tab.html',
             css: './04-core-code/ui/tabs/k1-tab/k1-tab.css'
         },
+        // [NEW] Add paths for K3
         k3: {
             html: './04-core-code/ui/tabs/k3-tab/k3-tab.html',
             css: './04-core-code/ui/tabs/k3-tab/k3-tab.css'
-        },
-        // [NEW] Add paths for K5
-        k5: {
-            html: './04-core-code/ui/tabs/k5-tab/k5-tab.html',
-            css: './04-core-code/ui/tabs/k5-tab/k5-tab.css'
         }
     },
     data: {
