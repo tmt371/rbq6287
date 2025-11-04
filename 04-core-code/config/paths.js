@@ -5,7 +5,14 @@ export const paths = {
         quoteTemplate: './04-core-code/ui/partials/quote-template-final.html', // [NEW]
         detailedItemList: './04-core-code/ui/partials/detailed-item-list-final.html' // [NEW]
     },
+    // [NEW] Add paths for new refactored tabs
+    tabs: {
+        k1: {
+            html: './04-core-code/ui/tabs/k1-tab/k1-tab.html',
+            css: './04-core-code/ui/tabs/k1-tab/k1-tab.css'
+        }
+    },
     data: {
-        priceMatrix: './03-data-models/price-matrix-v1.0.json'
+         priceMatrix: './03-data-models/price-matrix-v1.0.json'
     }
 };

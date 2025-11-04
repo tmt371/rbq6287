@@ -7,13 +7,16 @@ import { NotificationComponent } from './notification-component.js';
 import { DialogComponent } from './dialog-component.js';
 import { LeftPanelComponent } from './left-panel-component.js';
 import { EVENTS, DOM_IDS } from '../config/constants.js';
+// [NEW] Import K1 component (path will be defined in main.js or similar)
+// Note: We don't import K1TabComponent here directly, as it's injected by the App class.
 
 export class UIManager {
-    constructor({ appElement, eventAggregator, calculationService, rightPanelComponent }) {
+    constructor({ appElement, eventAggregator, calculationService, rightPanelComponent, k1TabComponent }) { // [NEW] Add k1TabComponent
         this.appElement = appElement;
         this.eventAggregator = eventAggregator;
         this.calculationService = calculationService;
         this.rightPanelComponent = rightPanelComponent; // [MODIFIED] Receive instance
+        this.k1TabComponent = k1TabComponent; // [NEW] Store instance
 
         this.numericKeyboardPanel = document.getElementById(DOM_IDS.NUMERIC_KEYBOARD_PANEL);
 
@@ -123,7 +126,13 @@ export class UIManager {
 
         this.tableComponent.render(state);
         this.summaryComponent.render(currentProductData.summary, state.ui.isSumOutdated);
-        this.leftPanelComponent.render(state.ui, state.quoteData);
+        
+        // [MODIFIED] Delegate K1 rendering to its own component
+        this.leftPanelComponent.render(state.ui, state.quoteData); // Still renders K2-K5
+        if (this.k1TabComponent) { // [NEW] Check if component exists before rendering
+            this.k1TabComponent.render(state.ui); // [NEW] Renders K1
+        }
+        
         this.rightPanelComponent.render(state);
 
         this._updateButtonStates(state);

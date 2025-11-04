@@ -2,16 +2,16 @@
 
 /**
  * @description
- * AppContext 是一個簡易的依賴注入（DI）容器，用於管理應用程式中各模組的實例與其間的依賴關係。
+ * AppContext 是本應用程式的依賴注入（DI）容器，用於管理應用程式中各模組的實例化與其依賴關係。
  * 它的主要職責是：
  * 1. 集中創建與配置服務（Services）、管理器（Managers）、工廠（Factories）與視圖（Views）。
- * 2. 解決模組之間的依賴，確保每個模組都能獲得其所需要的其他模組的實例。
- * 3. 簡化 `main.js`，使其只專注於應用的啟動流程，而非組件的創建細節。
+ * 2. 解決模組之間的依賴，確保每個模組都能獲得其所需要的 other 模組的實例。
+ * 3. 簡化 `main.js`，使其只專注於應用程式的啟動流程，而將組件的創建細節隔離。
  *
  * 這個模式的好處：
  * - **集中管理**: 所有的物件的創建與組裝都集中在此，方便維護與修改。
  * - **解耦**: 模組之間不直接創建依賴，而是透過 AppContext 來獲取，降低了耦合度。
- * - **便於測試**: 在測試時，可以輕易地將真實依賴替換注入模擬（mock）的組件。
+ * - **便於測試**: 在測試時，可以輕易地將真實依賴替換為注入的模擬（mock）組件。
  */
 export class AppContext {
     constructor() {
@@ -94,6 +94,12 @@ export class AppContext {
         const productFactory = this.get('productFactory');
         const focusService = this.get('focusService');
         const fileService = this.get('fileService');
+
+        // --- [NEW] Instantiate K1 Tab Components (Phase 1 Refactor) ---
+        const k1TabInputHandler = new K1TabInputHandler({ eventAggregator });
+        this.register('k1TabInputHandler', k1TabInputHandler);
+        const k1TabComponent = new K1TabComponent();
+        this.register('k1TabComponent', k1TabComponent);
 
         // --- [NEW] Instantiate the new QuoteGeneratorService ---
         const quoteGeneratorService = new QuoteGeneratorService({ calculationService });
@@ -178,6 +184,9 @@ export class AppContext {
             detailConfigView
         });
         this.register('appController', appController);
+
+        // [NEW] Initialize K1 Input Handler (Phase 1 Refactor)
+        k1TabInputHandler.initialize();
     }
 }
 
@@ -207,3 +216,7 @@ import { F3QuotePrepView } from './ui/views/f3-quote-prep-view.js';
 import { F4ActionsView } from './ui/views/f4-actions-view.js';
 // [REMOVED]
 import { DOM_IDS } from './config/constants.js'; // [NEW]
+
+// [NEW IMPORTS]
+import { K1TabInputHandler } from './ui/tabs/k1-tab/k1-tab-input-handler.js';
+import { K1TabComponent } from './ui/tabs/k1-tab/k1-tab-component.js';
