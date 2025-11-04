@@ -66,6 +66,13 @@ class App {
             await loadPartial(paths.tabs.k1.html, k1ContentContainer, 'innerHTML');
             loadCss(paths.tabs.k1.css);
         }
+
+        // --- [NEW] Load K3 Tab Bundle ---
+        const k3ContentContainer = document.getElementById('k3-content');
+        if (k3ContentContainer) {
+            await loadPartial(paths.tabs.k3.html, k3ContentContainer, 'innerHTML');
+            loadCss(paths.tabs.k3.css);
+        }
     }
 
     async run() {
@@ -84,6 +91,7 @@ class App {
         const appController = this.appContext.get('appController');
         const rightPanelComponent = this.appContext.get('rightPanelComponent');
         const k1TabComponent = this.appContext.get('k1TabComponent'); // [NEW] Get K1 component
+        const k3TabComponent = this.appContext.get('k3TabComponent'); // [NEW] Get K3 component
 
         // [REMOVED]
 
@@ -94,6 +102,7 @@ class App {
             calculationService,
             rightPanelComponent,
             k1TabComponent, // [NEW] Inject K1 component
+            k3TabComponent, // [NEW] Inject K3 component
             // [REMOVED]
         });
         // Step 5: Continue with the rest of the application startup.

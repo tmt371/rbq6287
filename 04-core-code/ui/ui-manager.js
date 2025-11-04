@@ -11,12 +11,13 @@ import { EVENTS, DOM_IDS } from '../config/constants.js';
 // Note: We don't import K1TabComponent here directly, as it's injected by the App class.
 
 export class UIManager {
-    constructor({ appElement, eventAggregator, calculationService, rightPanelComponent, k1TabComponent }) { // [NEW] Add k1TabComponent
+    constructor({ appElement, eventAggregator, calculationService, rightPanelComponent, k1TabComponent, k3TabComponent }) { // [NEW] Add k1/k3TabComponent
         this.appElement = appElement;
         this.eventAggregator = eventAggregator;
         this.calculationService = calculationService;
         this.rightPanelComponent = rightPanelComponent; // [MODIFIED] Receive instance
         this.k1TabComponent = k1TabComponent; // [NEW] Store instance
+        this.k3TabComponent = k3TabComponent; // [NEW] Store instance
 
         this.numericKeyboardPanel = document.getElementById(DOM_IDS.NUMERIC_KEYBOARD_PANEL);
 
@@ -127,10 +128,13 @@ export class UIManager {
         this.tableComponent.render(state);
         this.summaryComponent.render(currentProductData.summary, state.ui.isSumOutdated);
         
-        // [MODIFIED] Delegate K1 rendering to its own component
-        this.leftPanelComponent.render(state.ui, state.quoteData); // Still renders K2-K5
-        if (this.k1TabComponent) { // [NEW] Check if component exists before rendering
-            this.k1TabComponent.render(state.ui); // [NEW] Renders K1
+        // [MODIFIED] Delegate K1/K3 rendering to their own components
+        this.leftPanelComponent.render(state.ui, state.quoteData); // Still renders K2, K4, K5
+        if (this.k1TabComponent) { 
+            this.k1TabComponent.render(state.ui); // Renders K1
+        }
+        if (this.k3TabComponent) { // [NEW] Check and render K3
+            this.k3TabComponent.render(state.ui);
         }
         
         this.rightPanelComponent.render(state);

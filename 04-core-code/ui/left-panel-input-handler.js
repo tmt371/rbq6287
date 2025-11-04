@@ -16,7 +16,7 @@ export class LeftPanelInputHandler {
         this._setupTabButtons();
         // [REMOVED] _setupK1Inputs() call moved to K1TabInputHandler
         this._setupK2Inputs();
-        this._setupK3Inputs();
+        // [REMOVED] _setupK3Inputs() call moved to K3TabInputHandler
         this._setupK4Inputs();
         this._setupK5Inputs();
     }
@@ -98,26 +98,7 @@ export class LeftPanelInputHandler {
         }
     }
 
-    _setupK3Inputs() {
-        const editButton = document.getElementById('btn-k3-edit');
-        if (editButton) {
-            editButton.addEventListener('click', () => {
-                this.eventAggregator.publish(EVENTS.USER_TOGGLED_K3_EDIT_MODE);
-             });
-        }
-
-        const setupBatchCycleButton = (buttonId, column) => {
-            const button = document.getElementById(buttonId);
-            if (button) {
-                button.addEventListener('click', () => {
-                    this.eventAggregator.publish(EVENTS.USER_REQUESTED_BATCH_CYCLE, { column });
-                });
-            }
-        };
-        setupBatchCycleButton('btn-batch-cycle-over', 'over');
-        setupBatchCycleButton('btn-batch-cycle-oi', 'oi');
-        setupBatchCycleButton('btn-batch-cycle-lr', 'lr');
-    }
+    // [REMOVED] _setupK3Inputs() method has been cut and moved to K3TabInputHandler.
 
     _setupK4Inputs() {
         const setupK4Button = (buttonId, mode) => {

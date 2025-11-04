@@ -101,6 +101,12 @@ export class AppContext {
         const k1TabComponent = new K1TabComponent();
         this.register('k1TabComponent', k1TabComponent);
 
+        // --- [NEW] Instantiate K3 Tab Components (Phase 2 Refactor) ---
+        const k3TabInputHandler = new K3TabInputHandler({ eventAggregator });
+        this.register('k3TabInputHandler', k3TabInputHandler);
+        const k3TabComponent = new K3TabComponent();
+        this.register('k3TabComponent', k3TabComponent);
+
         // --- [NEW] Instantiate the new QuoteGeneratorService ---
         const quoteGeneratorService = new QuoteGeneratorService({ calculationService });
         this.register('quoteGeneratorService', quoteGeneratorService);
@@ -187,6 +193,8 @@ export class AppContext {
 
         // [NEW] Initialize K1 Input Handler (Phase 1 Refactor)
         k1TabInputHandler.initialize();
+        // [NEW] Initialize K3 Input Handler (Phase 2 Refactor)
+        k3TabInputHandler.initialize();
     }
 }
 
@@ -220,3 +228,5 @@ import { DOM_IDS } from './config/constants.js'; // [NEW]
 // [NEW IMPORTS]
 import { K1TabInputHandler } from './ui/tabs/k1-tab/k1-tab-input-handler.js';
 import { K1TabComponent } from './ui/tabs/k1-tab/k1-tab-component.js';
+import { K3TabInputHandler } from './ui/tabs/k3-tab/k3-tab-input-handler.js';
+import { K3TabComponent } from './ui/tabs/k3-tab/k3-tab-component.js';

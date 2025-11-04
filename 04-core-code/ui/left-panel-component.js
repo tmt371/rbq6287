@@ -20,10 +20,7 @@ export class LeftPanelComponent {
         this.lfDelButton = document.getElementById('btn-lf-del');
         // [NEW] Cache the SSet button
          this.k2SSetButton = document.getElementById('btn-k2-sset');
-        this.k3EditButton = document.getElementById('btn-k3-edit');
-        this.k3OverButton = document.getElementById('btn-batch-cycle-over');
-        this.k3OiButton = document.getElementById('btn-batch-cycle-oi');
-        this.k3LrButton = document.getElementById('btn-batch-cycle-lr');
+        // [REMOVED] K3 DOM Caching moved to K3TabComponent
         this.k4WinderButton = document.getElementById('btn-k5-winder');
         this.k4MotorButton = document.getElementById('btn-k5-motor');
         this.k4RemoteButton = document.getElementById('btn-k5-remote');
@@ -148,15 +145,7 @@ export class LeftPanelComponent {
         }
 
         // --- K3 Button Active/Disabled States ---
-        const isK3EditMode = activeEditMode === 'K3';
-        if (this.k3EditButton) {
-            this.k3EditButton.classList.toggle('active', isK3EditMode);
-            this.k3EditButton.disabled = activeEditMode !== null && !isK3EditMode;
-        }
-        const k3SubButtonsDisabled = !isK3EditMode;
-        if (this.k3OverButton) this.k3OverButton.disabled = k3SubButtonsDisabled;
-        if (this.k3OiButton) this.k3OiButton.disabled = k3SubButtonsDisabled;
-        if (this.k3LrButton) this.k3LrButton.disabled = k3SubButtonsDisabled;
+        // [REMOVED] K3 rendering logic moved to K3TabComponent
 
         const formatPrice = (price) => (typeof price === 'number') ? `$${price.toFixed(0)}` : '';
 
