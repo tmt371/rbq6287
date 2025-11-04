@@ -41,16 +41,7 @@ export class LeftPanelComponent {
         this.k4CordSubtractBtn = document.getElementById('btn-k5-cord-subtract');
         this.k4CordCountDisplay = document.getElementById('k5-display-cord-count');
         this.k4TotalDisplay = document.getElementById('k5-display-total');
-        this.k5DualButton = document.getElementById('btn-k4-dual');
-        this.k5ChainButton = document.getElementById('btn-k4-chain');
-        this.k5InputDisplay = document.getElementById('k4-input-display');
-        this.k5DualPriceValue = document.querySelector('#k4-dual-price-display .price-value');
-        this.k5WinderSummaryDisplay = document.getElementById('k5-display-winder-summary');
-        this.k5MotorSummaryDisplay = document.getElementById('k5-display-motor-summary');
-        this.k5RemoteSummaryDisplay = document.getElementById('k5-display-remote-summary');
-        this.k5ChargerSummaryDisplay = document.getElementById('k5-display-charger-summary');
-        this.k5CordSummaryDisplay = document.getElementById('k5-display-cord-summary');
-        this.k5AccessoriesTotalDisplay = document.getElementById('k5-display-accessories-total');
+        // [REMOVED] K5 DOM Caching moved to K5TabComponent
         this.tabButtons = this.panelElement.querySelectorAll('.tab-button');
         this.tabContents = this.panelElement.querySelectorAll('.tab-content');
         
@@ -188,33 +179,6 @@ export class LeftPanelComponent {
         if (this.k4CordSubtractBtn) this.k4CordSubtractBtn.disabled = cordBtnsDisabled;
 
         // --- K5 (Dual/Chain & Summary) States ---
-         if (this.k5DualButton) {
-            const isDisabled = dualChainMode !== null && dualChainMode !== 'dual';
-            this.k5DualButton.classList.toggle('active', dualChainMode === 'dual');
-            this.k5DualButton.disabled = isDisabled;
-        }
-        if (this.k5ChainButton) {
-            const isDisabled = dualChainMode !== null && dualChainMode !== 'chain';
-            this.k5ChainButton.classList.toggle('active', dualChainMode === 'chain');
-            this.k5ChainButton.disabled = isDisabled;
-        }
-        
-         if (this.k5InputDisplay) {
-            const isChainInputActive = dualChainMode === 'chain' && targetCell && targetCell.column === 'chain';
-            this.k5InputDisplay.disabled = !isChainInputActive;
-            this.k5InputDisplay.classList.toggle('active', isChainInputActive);
-            if (this.k5InputDisplay.value !== dualChainInputValue) this.k5InputDisplay.value = dualChainInputValue;
-        }
-        if (this.k5DualPriceValue) {
-            const dualPrice = accessoriesSummary.dualCostSum;
-            const newText = (typeof dualPrice === 'number') ? `$${dualPrice.toFixed(0)}` : '';
-            if (this.k5DualPriceValue.textContent !== newText) this.k5DualPriceValue.textContent = newText;
-        }
-        if (this.k5WinderSummaryDisplay) this.k5WinderSummaryDisplay.value = formatPrice(summaryWinderPrice);
-        if (this.k5MotorSummaryDisplay) this.k5MotorSummaryDisplay.value = formatPrice(summaryMotorPrice);
-        if (this.k5RemoteSummaryDisplay) this.k5RemoteSummaryDisplay.value = formatPrice(summaryRemotePrice);
-        if (this.k5ChargerSummaryDisplay) this.k5ChargerSummaryDisplay.value = formatPrice(summaryChargerPrice);
-        if (this.k5CordSummaryDisplay) this.k5CordSummaryDisplay.value = formatPrice(summaryCordPrice);
-        if (this.k5AccessoriesTotalDisplay) this.k5AccessoriesTotalDisplay.value = formatPrice(summaryAccessoriesTotal);
+        // [REMOVED] K5 rendering logic moved to K5TabComponent
     }
 }

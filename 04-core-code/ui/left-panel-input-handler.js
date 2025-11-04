@@ -18,7 +18,7 @@ export class LeftPanelInputHandler {
         this._setupK2Inputs();
         // [REMOVED] _setupK3Inputs() call moved to K3TabInputHandler
         this._setupK4Inputs();
-        this._setupK5Inputs();
+        // [REMOVED] _setupK5Inputs() call moved to K5TabInputHandler
     }
 
     _setupNavigationToggle() {
@@ -125,36 +125,5 @@ export class LeftPanelInputHandler {
         }
     }
 
-    _setupK5Inputs() {
-        const setupK5ModeButton = (buttonId, mode) => {
-            const button = document.getElementById(buttonId);
-            if (button) {
-                // [REFACTOR] Removed special handling for the remote button.
-                // It now fires a standard 'driveModeChanged' event, same as other accessory buttons.
-                button.addEventListener('click', () => {
-                    this.eventAggregator.publish(EVENTS.DRIVE_MODE_CHANGED, { mode });
-                });
-            }
-        };
-        setupK5ModeButton('btn-k5-winder', 'winder');
-        setupK5ModeButton('btn-k5-motor', 'motor');
-        setupK5ModeButton('btn-k5-remote', 'remote');
-        setupK5ModeButton('btn-k5-charger', 'charger');
-        setupK5ModeButton('btn-k5-3m-cord', 'cord');
-
-        const setupK5CounterButton = (buttonId, accessory, direction) => {
-            const button = document.getElementById(buttonId);
-            if (button) {
-                button.addEventListener('click', () => {
-                    this.eventAggregator.publish(EVENTS.ACCESSORY_COUNTER_CHANGED, { accessory, direction });
-                });
-            }
-        };
-        setupK5CounterButton('btn-k5-remote-add', 'remote', 'add');
-        setupK5CounterButton('btn-k5-remote-subtract', 'remote', 'subtract');
-        setupK5CounterButton('btn-k5-charger-add', 'charger', 'add');
-        setupK5CounterButton('btn-k5-charger-subtract', 'charger', 'subtract');
-        setupK5CounterButton('btn-k5-cord-add', 'cord', 'add');
-        setupK5CounterButton('btn-k5-cord-subtract', 'cord', 'subtract');
-    }
+    // [REMOVED] _setupK5Inputs() method has been cut and moved to K5TabInputHandler.
 }
