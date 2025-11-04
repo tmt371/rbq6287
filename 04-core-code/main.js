@@ -39,32 +39,11 @@ class App {
             }
         };
 
-        // [NEW] Helper function to load CSS files dynamically
-        const loadCss = (url) => {
-            try {
-                const link = document.createElement('link');
-                link.rel = 'stylesheet';
-                link.type = 'text/css';
-                link.href = url;
-                document.head.appendChild(link);
-            } catch (error) {
-                console.error(`Failed to load CSS from ${url}:`, error);
-            }
-        };
-
-        // --- Load Main Panel Skeletons ---
         await loadPartial(paths.partials.leftPanel, document.body);
 
         const functionPanel = document.getElementById(DOM_IDS.FUNCTION_PANEL);
         if (functionPanel) {
             await loadPartial(paths.partials.rightPanel, functionPanel, 'innerHTML');
-        }
-        
-        // --- [NEW] Load K1 Tab Bundle ---
-        const k1ContentContainer = document.getElementById('k1-content');
-        if (k1ContentContainer) {
-            await loadPartial(paths.tabs.k1.html, k1ContentContainer, 'innerHTML');
-            loadCss(paths.tabs.k1.css);
         }
     }
 
@@ -83,7 +62,6 @@ class App {
         const configManager = this.appContext.get('configManager');
         const appController = this.appContext.get('appController');
         const rightPanelComponent = this.appContext.get('rightPanelComponent');
-        const k1TabComponent = this.appContext.get('k1TabComponent'); // [NEW] Get K1 component
 
         // [REMOVED]
 
@@ -93,9 +71,9 @@ class App {
             eventAggregator,
             calculationService,
             rightPanelComponent,
-            k1TabComponent, // [NEW] Inject K1 component
             // [REMOVED]
         });
+
         // Step 5: Continue with the rest of the application startup.
         await configManager.initialize();
 

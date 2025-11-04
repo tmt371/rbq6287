@@ -7,15 +7,13 @@ import { NotificationComponent } from './notification-component.js';
 import { DialogComponent } from './dialog-component.js';
 import { LeftPanelComponent } from './left-panel-component.js';
 import { EVENTS, DOM_IDS } from '../config/constants.js';
-import { K1TabComponent } from './tabs/k1-tab/k1-tab-component.js'; // [NEW] Import K1 component
 
 export class UIManager {
-    constructor({ appElement, eventAggregator, calculationService, rightPanelComponent, k1TabComponent }) { // [NEW] Add k1TabComponent
+    constructor({ appElement, eventAggregator, calculationService, rightPanelComponent }) {
         this.appElement = appElement;
         this.eventAggregator = eventAggregator;
         this.calculationService = calculationService;
         this.rightPanelComponent = rightPanelComponent; // [MODIFIED] Receive instance
-        this.k1TabComponent = k1TabComponent; // [NEW] Store instance
 
         this.numericKeyboardPanel = document.getElementById(DOM_IDS.NUMERIC_KEYBOARD_PANEL);
 
@@ -125,11 +123,7 @@ export class UIManager {
 
         this.tableComponent.render(state);
         this.summaryComponent.render(currentProductData.summary, state.ui.isSumOutdated);
-        
-        // [MODIFIED] Delegate K1 rendering to its own component
-        this.leftPanelComponent.render(state.ui, state.quoteData); // Still renders K2-K5
-        this.k1TabComponent.render(state.ui); // [NEW] Renders K1
-        
+        this.leftPanelComponent.render(state.ui, state.quoteData);
         this.rightPanelComponent.render(state);
 
         this._updateButtonStates(state);
