@@ -21,26 +21,7 @@ export class LeftPanelComponent {
         // [NEW] Cache the SSet button
          this.k2SSetButton = document.getElementById('btn-k2-sset');
         // [REMOVED] K3 DOM Caching moved to K3TabComponent
-        this.k4WinderButton = document.getElementById('btn-k5-winder');
-        this.k4MotorButton = document.getElementById('btn-k5-motor');
-        this.k4RemoteButton = document.getElementById('btn-k5-remote');
-        this.k4ChargerButton = document.getElementById('btn-k5-charger');
-        this.k4CordButton = document.getElementById('btn-k5-3m-cord');
-        this.k4WinderDisplay = document.getElementById('k5-display-winder');
-        this.k4MotorDisplay = document.getElementById('k5-display-motor');
-        this.k4RemoteDisplay = document.getElementById('k5-display-remote');
-        this.k4ChargerDisplay = document.getElementById('k5-display-charger');
-        this.k4CordDisplay = document.getElementById('k5-display-cord');
-        this.k4RemoteAddBtn = document.getElementById('btn-k5-remote-add');
-        this.k4RemoteSubtractBtn = document.getElementById('btn-k5-remote-subtract');
-        this.k4RemoteCountDisplay = document.getElementById('k5-display-remote-count');
-        this.k4ChargerAddBtn = document.getElementById('btn-k5-charger-add');
-        this.k4ChargerSubtractBtn = document.getElementById('btn-k5-charger-subtract');
-        this.k4ChargerCountDisplay = document.getElementById('k5-display-charger-count');
-        this.k4CordAddBtn = document.getElementById('btn-k5-cord-add');
-        this.k4CordSubtractBtn = document.getElementById('btn-k5-cord-subtract');
-        this.k4CordCountDisplay = document.getElementById('k5-display-cord-count');
-        this.k4TotalDisplay = document.getElementById('k5-display-total');
+        // [REMOVED] K4 DOM Caching moved to K4TabComponent
         // [REMOVED] K5 DOM Caching moved to K5TabComponent
         this.tabButtons = this.panelElement.querySelectorAll('.tab-button');
         this.tabContents = this.panelElement.querySelectorAll('.tab-content');
@@ -141,42 +122,7 @@ export class LeftPanelComponent {
         const formatPrice = (price) => (typeof price === 'number') ? `$${price.toFixed(0)}` : '';
 
         // --- K4 (Drive/Accessories) States ---
-        const k4Buttons = [
-            { el: this.k4WinderButton, mode: 'winder' },
-            { el: this.k4MotorButton, mode: 'motor' },
-            { el: this.k4RemoteButton, mode: 'remote' },
-             { el: this.k4ChargerButton, mode: 'charger' },
-            { el: this.k4CordButton, mode: 'cord' }
-        ];
-        
-        const isAnyK4ModeActive = driveAccessoryMode !== null;
-        k4Buttons.forEach(({ el, mode }) => {
-            if (el) {
-                const isActive = driveAccessoryMode === mode;
-                el.classList.toggle('active', isActive);
-                el.disabled = isAnyK4ModeActive && !isActive;
-            }
-        });
-        
-        if (this.k4WinderDisplay) this.k4WinderDisplay.value = formatPrice(driveWinderTotalPrice);
-        if (this.k4MotorDisplay) this.k4MotorDisplay.value = formatPrice(driveMotorTotalPrice);
-        if (this.k4RemoteDisplay) this.k4RemoteDisplay.value = formatPrice(driveRemoteTotalPrice);
-        if (this.k4ChargerDisplay) this.k4ChargerDisplay.value = formatPrice(driveChargerTotalPrice);
-        if (this.k4CordDisplay) this.k4CordDisplay.value = formatPrice(driveCordTotalPrice);
-        if (this.k4RemoteCountDisplay) this.k4RemoteCountDisplay.value = driveRemoteCount;
-        if (this.k4ChargerCountDisplay) this.k4ChargerCountDisplay.value = driveChargerCount;
-        if (this.k4CordCountDisplay) this.k4CordCountDisplay.value = driveCordCount;
-        if (this.k4TotalDisplay) this.k4TotalDisplay.value = formatPrice(driveGrandTotal);
-        
-        const remoteBtnsDisabled = driveAccessoryMode !== 'remote';
-        if (this.k4RemoteAddBtn) this.k4RemoteAddBtn.disabled = remoteBtnsDisabled;
-        if (this.k4RemoteSubtractBtn) this.k4RemoteSubtractBtn.disabled = remoteBtnsDisabled;
-        const chargerBtnsDisabled = driveAccessoryMode !== 'charger';
-        if (this.k4ChargerAddBtn) this.k4ChargerAddBtn.disabled = chargerBtnsDisabled;
-        if (this.k4ChargerSubtractBtn) this.k4ChargerSubtractBtn.disabled = chargerBtnsDisabled;
-        const cordBtnsDisabled = driveAccessoryMode !== 'cord';
-        if (this.k4CordAddBtn) this.k4CordAddBtn.disabled = cordBtnsDisabled;
-        if (this.k4CordSubtractBtn) this.k4CordSubtractBtn.disabled = cordBtnsDisabled;
+        // [REMOVED] K4 rendering logic moved to K4TabComponent
 
         // --- K5 (Dual/Chain & Summary) States ---
         // [REMOVED] K5 rendering logic moved to K5TabComponent

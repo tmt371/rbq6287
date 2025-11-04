@@ -11,13 +11,14 @@ import { EVENTS, DOM_IDS } from '../config/constants.js';
 // Note: We don't import K1TabComponent here directly, as it's injected by the App class.
 
 export class UIManager {
-    constructor({ appElement, eventAggregator, calculationService, rightPanelComponent, k1TabComponent, k3TabComponent, k5TabComponent }) { // [NEW] Add k1/k3/k5TabComponent
+    constructor({ appElement, eventAggregator, calculationService, rightPanelComponent, k1TabComponent, k3TabComponent, k4TabComponent, k5TabComponent }) { // [NEW] Add k1/k3/k4/k5TabComponent
         this.appElement = appElement;
         this.eventAggregator = eventAggregator;
         this.calculationService = calculationService;
         this.rightPanelComponent = rightPanelComponent; // [MODIFIED] Receive instance
         this.k1TabComponent = k1TabComponent; // [NEW] Store instance
         this.k3TabComponent = k3TabComponent; // [NEW] Store instance
+        this.k4TabComponent = k4TabComponent; // [NEW] Store instance
         this.k5TabComponent = k5TabComponent; // [NEW] Store instance
 
         this.numericKeyboardPanel = document.getElementById(DOM_IDS.NUMERIC_KEYBOARD_PANEL);
@@ -129,16 +130,19 @@ export class UIManager {
         this.tableComponent.render(state);
         this.summaryComponent.render(currentProductData.summary, state.ui.isSumOutdated);
         
-        // [MODIFIED] Delegate K1/K3/K5 rendering to their own components
-        this.leftPanelComponent.render(state.ui, state.quoteData); // Still renders K2, K4
+        // [MODIFIED] Delegate K1/K3/K4/K5 rendering to their own components
+        this.leftPanelComponent.render(state.ui, state.quoteData); // Still renders K2
         if (this.k1TabComponent) { 
             this.k1TabComponent.render(state.ui); // Renders K1
         }
         if (this.k3TabComponent) { 
             this.k3TabComponent.render(state.ui); // Renders K3
         }
-        if (this.k5TabComponent) { // [NEW] Check and render K5
-            this.k5TabComponent.render(state.ui, state.quoteData);
+        if (this.k4TabComponent) { // [NEW] Check and render K4
+            this.k4TabComponent.render(state.ui);
+        }
+        if (this.k5TabComponent) { 
+            this.k5TabComponent.render(state.ui, state.quoteData); // Renders K5
         }
         
         this.rightPanelComponent.render(state);

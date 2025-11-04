@@ -74,6 +74,13 @@ class App {
             loadCss(paths.tabs.k3.css);
         }
 
+        // --- [NEW] Load K4 Tab Bundle ---
+        const k4ContentContainer = document.getElementById('k4-content');
+        if (k4ContentContainer) {
+            await loadPartial(paths.tabs.k4.html, k4ContentContainer, 'innerHTML');
+            loadCss(paths.tabs.k4.css);
+        }
+
         // --- [NEW] Load K5 Tab Bundle ---
         const k5ContentContainer = document.getElementById('k5-content');
         if (k5ContentContainer) {
@@ -99,6 +106,7 @@ class App {
         const rightPanelComponent = this.appContext.get('rightPanelComponent');
         const k1TabComponent = this.appContext.get('k1TabComponent'); // [NEW] Get K1 component
         const k3TabComponent = this.appContext.get('k3TabComponent'); // [NEW] Get K3 component
+        const k4TabComponent = this.appContext.get('k4TabComponent'); // [NEW] Get K4 component
         const k5TabComponent = this.appContext.get('k5TabComponent'); // [NEW] Get K5 component
 
         // [REMOVED]
@@ -111,6 +119,7 @@ class App {
             rightPanelComponent,
             k1TabComponent, // [NEW] Inject K1 component
             k3TabComponent, // [NEW] Inject K3 component
+            k4TabComponent, // [NEW] Inject K4 component
             k5TabComponent, // [NEW] Inject K5 component
             // [REMOVED]
         });

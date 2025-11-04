@@ -107,6 +107,12 @@ export class AppContext {
         const k3TabComponent = new K3TabComponent();
         this.register('k3TabComponent', k3TabComponent);
 
+        // --- [NEW] Instantiate K4 Tab Components (Phase 4 Refactor) ---
+        const k4TabInputHandler = new K4TabInputHandler({ eventAggregator });
+        this.register('k4TabInputHandler', k4TabInputHandler);
+        const k4TabComponent = new K4TabComponent();
+        this.register('k4TabComponent', k4TabComponent);
+
         // --- [NEW] Instantiate K5 Tab Components (Phase 3 Refactor) ---
         const k5TabInputHandler = new K5TabInputHandler({ eventAggregator });
         this.register('k5TabInputHandler', k5TabInputHandler);
@@ -201,6 +207,8 @@ export class AppContext {
         k1TabInputHandler.initialize();
         // [NEW] Initialize K3 Input Handler (Phase 2 Refactor)
         k3TabInputHandler.initialize();
+        // [NEW] Initialize K4 Input Handler (Phase 4 Refactor)
+        k4TabInputHandler.initialize();
         // [NEW] Initialize K5 Input Handler (Phase 3 Refactor)
         k5TabInputHandler.initialize();
     }
@@ -238,5 +246,7 @@ import { K1TabInputHandler } from './ui/tabs/k1-tab/k1-tab-input-handler.js';
 import { K1TabComponent } from './ui/tabs/k1-tab/k1-tab-component.js';
 import { K3TabInputHandler } from './ui/tabs/k3-tab/k3-tab-input-handler.js';
 import { K3TabComponent } from './ui/tabs/k3-tab/k3-tab-component.js';
+import { K4TabInputHandler } from './ui/tabs/k4-tab/k4-tab-input-handler.js';
+import { K4TabComponent } from './ui/tabs/k4-tab/k4-tab-component.js';
 import { K5TabInputHandler } from './ui/tabs/k5-tab/k5-tab-input-handler.js';
 import { K5TabComponent } from './ui/tabs/k5-tab/k5-tab-component.js';

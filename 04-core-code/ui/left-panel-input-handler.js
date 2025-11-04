@@ -17,8 +17,8 @@ export class LeftPanelInputHandler {
         // [REMOVED] _setupK1Inputs() call moved to K1TabInputHandler
         this._setupK2Inputs();
         // [REMOVED] _setupK3Inputs() call moved to K3TabInputHandler
-        // [REMOVED] _setupK4Inputs() call moved to K5TabInputHandler
-        this._setupK5Inputs();
+        this._setupK4Inputs(); // [NOTE] This handles K5 (Dual/Chain) logic
+        // [REMOVED] _setupK5Inputs() call moved to K4TabInputHandler
     }
 
     _setupNavigationToggle() {
@@ -100,38 +100,30 @@ export class LeftPanelInputHandler {
 
     // [REMOVED] _setupK3Inputs() method has been cut and moved to K3TabInputHandler.
 
-    // [REMOVED] _setupK4Inputs() method has been cut and moved to K5TabInputHandler.
-
-    _setupK5Inputs() {
-        const setupK5ModeButton = (buttonId, mode) => {
+    _setupK4Inputs() {
+        const setupK4Button = (buttonId, mode) => {
             const button = document.getElementById(buttonId);
             if (button) {
-                // [REFACTOR] Removed special handling for the remote button.
-                // It now fires a standard 'driveModeChanged' event, same as other accessory buttons.
-                button.addEventListener('click', () => {
-                    this.eventAggregator.publish(EVENTS.DRIVE_MODE_CHANGED, { mode });
+                 button.addEventListener('click', () => {
+                    this.eventAggregator.publish(EVENTS.DUAL_CHAIN_MODE_CHANGED, { mode });
                 });
             }
         };
-        setupK5ModeButton('btn-k5-winder', 'winder');
-        setupK5ModeButton('btn-k5-motor', 'motor');
-        setupK5ModeButton('btn-k5-remote', 'remote');
-        setupK5ModeButton('btn-k5-charger', 'charger');
-        setupK5ModeButton('btn-k5-3m-cord', 'cord');
+        setupK4Button('btn-k4-dual', 'dual');
+        setupK4Button('btn-k4-chain', 'chain');
 
-        const setupK5CounterButton = (buttonId, accessory, direction) => {
-            const button = document.getElementById(buttonId);
-            if (button) {
-                button.addEventListener('click', () => {
-                    this.eventAggregator.publish(EVENTS.ACCESSORY_COUNTER_CHANGED, { accessory, direction });
-                });
-            }
-        };
-        setupK5CounterButton('btn-k5-remote-add', 'remote', 'add');
-        setupK5CounterButton('btn-k5-remote-subtract', 'remote', 'subtract');
-        setupK5CounterButton('btn-k5-charger-add', 'charger', 'add');
-        setupK5CounterButton('btn-k5-charger-subtract', 'charger', 'subtract');
-        setupK5CounterButton('btn-k5-cord-add', 'cord', 'add');
-        setupK5CounterButton('btn-k5-cord-subtract', 'cord', 'subtract');
+        const k4Input = document.getElementById('k4-input-display');
+        if (k4Input) {
+            k4Input.addEventListener('keydown', (event) => {
+                 if (event.key === 'Enter') {
+                    event.preventDefault();
+                    this.eventAggregator.publish(EVENTS.CHAIN_ENTER_PRESSED, {
+                        value: event.target.value
+                     });
+                }
+            });
+        }
     }
+
+    // [REMOVED] _setupK5Inputs() method has been cut and moved to K4TabInputHandler.
 }
